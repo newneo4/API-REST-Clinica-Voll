@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.paciente.Paciente;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Table(name = "consultas")
@@ -21,10 +20,11 @@ public class Consulta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JoinColumn(name = "id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "consulta_id")
+    @JoinColumn(name = "medico_id")
     private Medico medico;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -34,4 +34,10 @@ public class Consulta {
     @Column(name = "date")
     private LocalDateTime data;
 
+
+    public Consulta(Medico medico, Paciente paciente, LocalDateTime data) {
+        this.medico = medico;
+        this.paciente = paciente;
+        this.data = data;
+    }
 }

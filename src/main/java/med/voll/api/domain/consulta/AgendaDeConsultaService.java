@@ -44,7 +44,7 @@ public class AgendaDeConsultaService {
             throw new ValidacionDeIntegridad("no existen medicos disponibles para este horario y especialidad");
         }
 
-        var consulta = new Consulta(null,medico,paciente,datos.fecha());
+        var consulta = new Consulta(medico,paciente,datos.fecha());
 
         consultaRepository.save(consulta);
 
@@ -59,6 +59,6 @@ public class AgendaDeConsultaService {
         if(datos.especialidad()==null){
             throw new ValidacionDeIntegridad("debe seleccionarse una especialidad para el medico");
         }
-        return medicoRepository.seleccionarMedicoConEspecialidadEnFecha(datos.especialidad(),datos.fecha());
+        return medicoRepository.seleccionarMedicoConEspecialidadEnFecha(datos.especialidad(), datos.fecha());
     }
 }
